@@ -1,5 +1,5 @@
 import pickle
-from ..configs import ckip_path
+from configs import ckip_path
 
 
 def connect_ckip_drivers() -> tuple:

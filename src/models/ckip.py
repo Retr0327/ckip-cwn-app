@@ -6,7 +6,7 @@ def connect_ckip_drivers() -> tuple:
     """The connect_ckip_drivers function connects to the ckip drivers.
 
     Returns:
-        a tuple, containing CkipWordSegmenter and CkipPosTagger.
+        a tuple, containing CkipWordSegmenter, CkipPosTagger and CkipNerChunker.
     """
 
     with open(ckip_path, "rb") as file:

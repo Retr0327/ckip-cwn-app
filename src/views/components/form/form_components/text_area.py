@@ -1,5 +1,5 @@
-import streamlit as st
 from typing import Optional
+from streamlit import text_area
 
 
 def add_text_area(
@@ -8,4 +8,4 @@ def add_text_area(
     height: Optional[int] = None,
     key: Optional[str] = None,
 ):
-    return st.text_area(title, placeholder=placeholder, height=height, key=key)
+    return text_area(title, placeholder=placeholder, height=height, key=key)

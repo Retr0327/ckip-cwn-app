@@ -24,7 +24,7 @@ def visualize_side_bar():
         visualizers = CKIP_VISUALIZERS if model_options == "CKIP" else CWN_VISUALIZERS
 
         active_visualizers = form_controller(
-            control="multi-select", options=visualizers
+            control="multi-select", title="Visualizers", options=visualizers
         )
-
+        
         return active_visualizers

@@ -15,9 +15,17 @@ def download_ckip_drivers():
     NLP_MODEL = "bert-base"
 
     if not Path(ckip_path).exists():
-        from ckip_transformers.nlp import CkipWordSegmenter, CkipPosTagger
+        from ckip_transformers.nlp import (
+            CkipWordSegmenter,
+            CkipPosTagger,
+            CkipNerChunker,
+        )
 
-        drivers = (CkipWordSegmenter(model=NLP_MODEL), CkipPosTagger(model=NLP_MODEL))
+        drivers = (
+            CkipWordSegmenter(model=NLP_MODEL),
+            CkipPosTagger(model=NLP_MODEL),
+            CkipNerChunker(model=NLP_MODEL),
+        )
 
         with open(rf"{ckip_path}", "wb") as file:
             pickle.dump(drivers, file)

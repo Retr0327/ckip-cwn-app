@@ -1,4 +1,4 @@
-from .ckip_helper import chunk_multiple_entities
+from .ckip_helper import Segmenter, chunk_multiple_entities
 
 
-__all__ = ["chunk_multiple_entities"]
+__all__ = ["Segmenter", "chunk_multiple_entities"]

@@ -34,4 +34,4 @@ def visualize_side_bar():
             format_func=format_option,
         )
 
-        return active_visualizers
+        return model_options, active_visualizers

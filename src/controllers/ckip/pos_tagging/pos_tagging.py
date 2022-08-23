@@ -1,17 +1,6 @@
 import asyncio
 from typing import List
-from utils import Segmenter
-
-
-async def add_textsubscript(segmented_list: List[str]) -> str:
-    create = (
-        lambda value: f"<span>{value[0]}<sub style='margin-right: 0.1rem'>{value[1]}</sub></span>"
-    )
-    return "".join(list(map(create, segmented_list)))
-
-
-async def add_multiple_textsubscripts(segmented_result: List[List[str]]) -> List[str]:
-    return await asyncio.gather(*list(map(add_textsubscript, segmented_result)))
+from utils import Segmenter, add_multiple_textsubscripts
 
 
 def handle_pos_tagging(sentence_list: List[str]):

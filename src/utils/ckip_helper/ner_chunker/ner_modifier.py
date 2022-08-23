@@ -1,43 +1,44 @@
-from dataclasses import dataclass
-from typing import List, Union, Tuple, Optional
+from functools import lru_cache
+from typing import List, Tuple, Optional
 from ckip_transformers.nlp.util import NerToken
 
 
-def add_textsubscript(
-    ner_token_list: List[NerToken],
-) -> List[List[Union[str, Tuple[int]]]]:
-    """The add_textsubscript method combines the token word and the NER-tag, and
-    specifies the NER-tag to be displayed as subscript.
+def add_textsubscript(ner_token_list: List[NerToken]) -> Tuple[Tuple[str]]:
+    """The add_textsubscript function combines the token word and the
+    NER-tag, and specifies the NER-tag to be displayed as subscript.
 
     Args:
         ner_token_list (NerToken): a list of NerToken
     Returns:
-        a list: [
-            ["<span>傅達仁<sub style='margin-right: 0.1rem'>PERSON</sub></span>", (0, 3)]
+        a tuple: (
+            ("<span>傅達仁<sub style='margin-right: 0.1rem'>PERSON</sub></span>", (0, 3))
             ...
-        ]
+        )
     """
 
-    combine = lambda value: [
+    combine = lambda value: (
         f"<span>{value.word}<sub style='margin-right: 0.1rem'>{value.ner}</sub></span>",
         value.idx,
-    ]
-    return list(map(combine, ner_token_list))
+    )
+    return tuple(map(combine, ner_token_list))
 
 
+@lru_cache(maxsize=None)
 def modify_sentence(
-    span_list: List[List[Union[str, Tuple[int]]]],
-    sentence: str,
-    increased_len: Optional[int] = 0,
+    span_tuple: Tuple[Tuple[str]], sentence: str, increased_len: Optional[int] = 0
 ) -> str:
-    if len(span_list) == 1:
+    if len(list(span_tuple)) == 1:
+        span_list = list(span_tuple)
         modified_word, index = span_list[0]
         start_index, end_index = index
         start_index += increased_len
         end_index += increased_len
         return "".join((sentence[:start_index], modified_word, sentence[end_index:]))
 
+    span_list = list(span_tuple)
     modified_word, index = span_list.pop(0)
+    span_tuple = tuple(span_list)
+
     start_index, end_index = index
 
     if increased_len:
@@ -50,8 +51,7 @@ def modify_sentence(
     )
 
     index_gap = len(modified_word) - len(original_word)
-
-    return modify_sentence(span_list, modified_sentence, increased_len + index_gap)
+    return modify_sentence(span_tuple, modified_sentence, increased_len + index_gap)
 
 
 def replace_entities(sentence: str, ner_token_list: List[NerToken]) -> str:

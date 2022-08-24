@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Callable
 
 
-def load_package(pkg_path: Path, pkg_name: str, dowload: Callable) -> None:
+def load_package(pkg_name: str, pkg_path: Path, dowload: Callable) -> None:
     """The load_package function loads the package.
 
     Args:

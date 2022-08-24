@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Union
 from ..form import form_controller
 from streamlit import sidebar, image, session_state
 from .options import MODEL_OPTIONS, CKIP_VISUALIZERS, CWN_VISUALIZERS
@@ -9,9 +9,20 @@ def remove_input_data():
         del session_state["input_data"]
 
 
-def format_option(option: Dict[str, str]) -> str:
-    """The format_options function gets the value of a dict."""
-    return list(option.values())[0]
+def format_option(option: Union[str, Dict[str, str]]) -> str:
+    """The format_options function formats each option in a list of options.
+    If `option` is a dict, the function will extract the value from the dict.
+
+    Args:
+        option (str or dict)
+    Returns:
+        a str
+    """
+
+    if isinstance(option, dict):
+        return list(option.values())[0]
+
+    return option
 
 
 def visualize_side_bar():

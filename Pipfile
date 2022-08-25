@@ -9,6 +9,7 @@ ckip-transformers = "*"
 cwngraph = "*"
 distiltag = "*"
 cwnsensetagger = "*"
+redis = "*"
 
 [dev-packages]
 

@@ -1,5 +1,6 @@
 redis==4.3.4
 streamlit==1.12.0
+aiofile==3.8.1
 ckip-transformers==0.3.2
 cwngraph==0.4.0
 cwnsensetagger==0.1.6

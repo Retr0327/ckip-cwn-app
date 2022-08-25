@@ -33,7 +33,7 @@ async def create_result(ws_result) -> List[Union[str, int]]:
     )
 
 
-def handle_word_segmentation(sentence_list: List[str]) -> List[str]:
+def handle_word_segmentation(nlp_model: str, sentence_list: List[str]) -> List[str]:
     """The handle_word_segmentation function handles the request that deals with word
     segmentation.
 
@@ -42,7 +42,7 @@ def handle_word_segmentation(sentence_list: List[str]) -> List[str]:
     Returns:
         a list of strings
     """
-    ws_result = WordSegmentation(sentence_list).segment()
+    ws_result = WordSegmentation(nlp_model, sentence_list).segment()
     ws_span_tags, redis_result = asyncio.run(create_result(ws_result))
 
     return ws_span_tags

@@ -5,3 +5,4 @@ ckip-transformers==0.3.2
 cwngraph==0.4.0
 cwnsensetagger==0.1.6
 distiltag==0.2.2
+python-dotenv==0.20.0

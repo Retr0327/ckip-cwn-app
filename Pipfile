@@ -11,6 +11,7 @@ distiltag = "*"
 cwnsensetagger = "*"
 redis = "*"
 aiofiles = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

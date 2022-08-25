@@ -11,12 +11,13 @@ ckip_dir = pkg_path / "models"
 ckip_path = ckip_dir / "ckip" / "ckip_drivers.pickle"
 
 
-def download_ckip_drivers():
+NLP_MODEL = "bert-base"
+
+
+def download_ckip_drivers(nlp_model: Optional[str] = NLP_MODEL):
     """The download_ckip_drivers function downloads the ckip drivers, and saves
     them to a pickle file if the `ckip_drivers.pickle` does not exist.
     """
-
-    NLP_MODEL = "bert-base"
 
     from ckip_transformers.nlp import (
         CkipWordSegmenter,
@@ -25,9 +26,9 @@ def download_ckip_drivers():
     )
 
     drivers = (
-        CkipWordSegmenter(model=NLP_MODEL),
-        CkipPosTagger(model=NLP_MODEL),
-        CkipNerChunker(model=NLP_MODEL),
+        CkipWordSegmenter(model=nlp_model),
+        CkipPosTagger(model=nlp_model),
+        CkipNerChunker(model=nlp_model),
     )
 
     with open(rf"{ckip_path}", "wb") as file:

@@ -1,10 +1,12 @@
 import asyncio
 from typing import List
+from .text_color import create_color
 
 
 async def add_pos_textsubscript(data_list: List[str]) -> str:
+
     create = (
-        lambda value: f"<span>{value[0]}<sub style='margin-right: 0.1rem'>{value[1]}</sub></span>"
+        lambda value: f"<span>{value[0]}<sub style='margin-right: 0.7rem; color: {create_color(value[1])};'>({value[1]})</sub></span>"
     )
     return "".join(list(map(create, data_list)))
 

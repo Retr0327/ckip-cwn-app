@@ -8,7 +8,7 @@ from typing import Optional
 
 pkg_path = Path("__file__").resolve().parent / "src"
 ckip_dir = pkg_path / "models"
-ckip_path = ckip_dir / "ckip_drivers.pickle"
+ckip_path = ckip_dir / "ckip" / "ckip_drivers.pickle"
 
 
 def download_ckip_drivers():

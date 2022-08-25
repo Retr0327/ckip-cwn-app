@@ -14,6 +14,6 @@ def create_block(visualizer, sentence_list):
     return visualizer_factories[visualizer]()
 
 
-def display_cwn(visualizers: str, sentence_list: List[str]):
+def display_cwn(nlp_model: str, visualizers: str, sentence_list: List[str]):
     for visualizer in visualizers:
         create_block(visualizer, sentence_list)

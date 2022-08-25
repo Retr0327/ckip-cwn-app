@@ -1,12 +1,13 @@
 import asyncio
 from typing import List
 from itertools import chain
-from utils import disambiguate_word_sense, create_cwn_sense_tags
+from utils import disambiguate_word_sense, create_cwn_sense_tags, create_pos_color
 
 
 async def add_textsubscript(segmented_list) -> str:
+
     create = (
-        lambda value: f"<span>{value[0]}<sub style='margin-right: 0.1rem'>{value[1]}</sub></span>"
+        lambda value: f"<span>{value[0]}<sub style='margin-right: 1rem; color: {create_pos_color(value[1])};'>{value[1]}</sub></span>"
     )
     return "".join(list(map(create, chain(*segmented_list))))
 

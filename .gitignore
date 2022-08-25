@@ -135,5 +135,5 @@ dmypy.json
 # tempCodeRunnerFile
 tempCodeRunnerFile.py
 
-# ckip drivers 
-ckip_drivers.pickle
+# pickle files
+*.pickle

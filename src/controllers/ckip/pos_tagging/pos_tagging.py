@@ -1,17 +1,8 @@
+import json
 import asyncio
 from typing import List
-from utils import Segmenter
-
-
-async def add_textsubscript(segmented_list: List[str]) -> str:
-    create = (
-        lambda value: f"<span>{value[0]}<sub style='margin-right: 0.1rem'>{value[1]}</sub></span>"
-    )
-    return "".join(list(map(create, segmented_list)))
-
-
-async def add_multiple_textsubscripts(segmented_result: List[List[str]]) -> List[str]:
-    return await asyncio.gather(*list(map(add_textsubscript, segmented_result)))
+from models import redis_cli
+from utils import add_multiple_textsubscripts, PosTagging
 
 
 def handle_pos_tagging(sentence_list: List[str]):
@@ -22,6 +13,6 @@ def handle_pos_tagging(sentence_list: List[str]):
     Returns:
         a list of strings
     """
-    segmented_result = Segmenter(sentence_list).segment()
-    result = asyncio.run(add_multiple_textsubscripts(segmented_result))
-    return result
+    ws_result = json.loads(redis_cli.hgetall("ws")["data"])
+    segmented_result = PosTagging(ws_result).tag()
+    return asyncio.run(add_multiple_textsubscripts("pos", segmented_result))

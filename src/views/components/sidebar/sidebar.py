@@ -31,7 +31,7 @@ def visualize_side_bar():
 
         model_options = form_controller(
             control="select-box",
-            title="NLP 模型",
+            title="中文 NLP 管線處理",
             options=MODEL_OPTIONS,
             on_change=remove_input_data,
         )
@@ -40,7 +40,7 @@ def visualize_side_bar():
 
         active_visualizers = form_controller(
             control="multi-select",
-            title="Visualizers",
+            title="功能",
             options=visualizers,
             format_func=format_option,
         )

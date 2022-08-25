@@ -4,7 +4,7 @@ from .block import DistilTagBlock, CWNSenseTagBlock
 
 
 def create_block(visualizer, sentence_list):
-    distil_tags, cwn_tags = request("distil_tag", sentence_list)
+    distil_tags, cwn_tags = request("cwn", sentence_list)
 
     visualizer_factories = {
         "DistilTag": DistilTagBlock(visualizer, distil_tags).visualize,

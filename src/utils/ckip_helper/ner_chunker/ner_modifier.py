@@ -1,5 +1,6 @@
 from functools import lru_cache
 from typing import List, Tuple, Optional
+from ...text_color import create_entity_color
 from ckip_transformers.nlp.util import NerToken
 
 
@@ -17,7 +18,7 @@ def add_textsubscript(ner_token_list: List[NerToken]) -> Tuple[Tuple[str]]:
     """
 
     combine = lambda value: (
-        f"<span>{value.word}<sub style='margin-right: 0.1rem'>{value.ner}</sub></span>",
+        f"<span style='color: {create_entity_color(value.ner)};'>{value.word}<sub style='margin-right: 0.6rem'>{value.ner}</sub></span>",
         value.idx,
     )
     return tuple(map(combine, ner_token_list))

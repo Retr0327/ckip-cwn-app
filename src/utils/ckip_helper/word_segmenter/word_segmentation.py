@@ -9,10 +9,11 @@ class WordSegmentation:
     The WordSegmentation object divides written text in `sentence_lists` into meaningful units.
     """
 
+    nlp_model: str
     sentence_list: List[str]
 
     def __post_init__(self) -> None:
-        self.ws_driver = connect_ckip_drivers()[0]
+        self.ws_driver = connect_ckip_drivers(self.nlp_model)[0]
 
     def remove_empty_string(self, sentence_list: List[str]) -> List[str]:
         """The remove_empty_string method removes empty string in `sentence_list`.

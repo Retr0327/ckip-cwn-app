@@ -9,10 +9,11 @@ class PosTagging:
     The PosTagging object marks a word in `ws_result` as corresponding to a particular part of speech.
     """
 
+    nlp_model: str
     ws_result: List[Union[List[None], List[str]]]
 
     def __post_init__(self) -> None:
-        self.pos_driver = connect_ckip_drivers()[1]
+        self.pos_driver = connect_ckip_drivers(self.nlp_model)[1]
 
     def pack_ws_pos_sentece(self, ws_pos_pair: tuple) -> List[tuple]:
         """The pack_ws_pos_sentece method packs both words and thier part-of-speech to a pair.

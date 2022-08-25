@@ -16,15 +16,16 @@ def is_list_of_empty_list(ner_token_list: List[Union[NerToken, None]]) -> bool:
     return all(map(lambda value: not value, ner_token_list))
 
 
-def handle_ner_chunker(sentence_list: List[str]) -> List[str]:
+def handle_ner_chunker(nlp_model: str, sentence_list: List[str]) -> List[str]:
     """The handle_ner_chunker function handles the request that deals with NER.
 
     Args:
+        nlp_model (str): the nlp model name
         sentence_list (list): a list of sentences
     Returns:
         a list of strings
     """
-    ner_driver = connect_ckip_drivers()[2]
+    ner_driver = connect_ckip_drivers(nlp_model)[2]
     ner_token_list = ner_driver(sentence_list)
 
     if is_list_of_empty_list(ner_token_list):

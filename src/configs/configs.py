@@ -1,4 +1,6 @@
 import pickle
+import asyncio
+import aiofiles
 from pathlib import Path
 from typing import Optional
 
@@ -8,17 +10,15 @@ from typing import Optional
 
 pkg_path = Path("__file__").resolve().parent / "src"
 ckip_dir = pkg_path / "models"
-ckip_path = ckip_dir / "ckip" / "ckip_drivers.pickle"
+ckip_path = ckip_dir / "ckip"
 
 
-NLP_MODEL = "bert-base"
+async def write_drivers(nlp_model: str) -> None:
+    """The write drivers function writes the ckip drivers to pickle files asynchronously.
 
-
-def download_ckip_drivers(nlp_model: Optional[str] = NLP_MODEL):
-    """The download_ckip_drivers function downloads the ckip drivers, and saves
-    them to a pickle file if the `ckip_drivers.pickle` does not exist.
+    Args:
+        nlp_model (str): the nlp model name
     """
-
     from ckip_transformers.nlp import (
         CkipWordSegmenter,
         CkipPosTagger,
@@ -31,8 +31,16 @@ def download_ckip_drivers(nlp_model: Optional[str] = NLP_MODEL):
         CkipNerChunker(model=nlp_model),
     )
 
-    with open(rf"{ckip_path}", "wb") as file:
-        pickle.dump(drivers, file)
+    driver_path = ckip_path / f"{nlp_model}_drivers.pickle"
+    async with aiofiles.open(driver_path, mode="wb") as file:
+        result = pickle.dumps(drivers)
+        await file.write(result)
+        print(f"{nlp_model}_drivers.pickle done!")
+
+
+async def download_ckip_drivers():
+    options = ["bert-base", "albert-tiny", "bert-tiny", "albert-base"]
+    await asyncio.gather(*list(map(write_drivers, options)))
 
 
 # --------------------------------------------------------------------

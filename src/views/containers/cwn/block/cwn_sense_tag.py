@@ -16,15 +16,21 @@ class CWNSenseTagBlock(Block):
     sentence_list: List[str]
     cwn_tags: List[List[List[tuple]]]
 
-    async def create_data_frame(self, data: List[tuple]):
-        return list(map(lambda value: pd.DataFrame(value), data))
+    def create_data_frame(self, value):
+        df = pd.DataFrame(value)
+        df = df.drop([2], axis=1)
+        df = df.rename({0: "詞彙", 1: "詞類", 3: "釋義"}, axis=1)
+        return df
 
-    async def create_multiple_df(self, cwn_tags: List[List[List[tuple]]]):
-        return await asyncio.gather(*list(map(self.create_data_frame, cwn_tags)))
+    async def create_multiple_dfs(self, data: List[tuple]):
+        return list(map(self.create_data_frame, data))
+
+    async def gather_multiple_dfs(self, cwn_tags: List[List[List[tuple]]]):
+        return await asyncio.gather(*list(map(self.create_multiple_dfs, cwn_tags)))
 
     def visualize(self) -> None:
         st.subheader(self.title)
-        data_frames = asyncio.run(self.create_multiple_df(self.cwn_tags))
+        data_frames = asyncio.run(self.gather_multiple_dfs(self.cwn_tags))
         table_result = zip(self.sentence_list, data_frames)
 
         for sentence, tables in table_result:

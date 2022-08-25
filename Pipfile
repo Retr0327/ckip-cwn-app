@@ -10,7 +10,7 @@ cwngraph = "*"
 distiltag = "*"
 cwnsensetagger = "*"
 redis = "*"
-aiofile = "*"
+aiofiles = "*"
 
 [dev-packages]
 

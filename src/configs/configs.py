@@ -38,9 +38,8 @@ async def write_drivers(nlp_model: str) -> None:
         print(f"{nlp_model}_drivers.pickle done!")
 
 
-async def download_ckip_drivers():
-    options = ["bert-base", "albert-tiny", "bert-tiny", "albert-base"]
-    await asyncio.gather(*list(map(write_drivers, options)))
+async def download_ckip_drivers(ckip_nlp_models):
+    await asyncio.gather(*list(map(write_drivers, ckip_nlp_models)))
 
 
 # --------------------------------------------------------------------

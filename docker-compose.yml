@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  app:
+    build: ./
+    ports:
+      - 8501:8501
+    environment:
+      - PYTHON_ENV=production
+    command: "streamlit run ./src/app.py"
+
+  redis:
+    image: "redis:alpine"
+
+  nginx:
+    image: "nginx:stable"
+    depends_on:
+      - app
+    links:
+      - app
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - "./deployment/nginx.conf:/etc/nginx/nginx.conf"

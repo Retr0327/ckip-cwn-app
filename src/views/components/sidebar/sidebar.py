@@ -1,8 +1,7 @@
 import streamlit as st
-from typing import Dict, Union
 from ..form import form_controller
-from configs import download_ckip_drivers
-from .options import MODEL_OPTIONS, PIPELINE_OPTIONS, CKIP_VISUALIZERS, CWN_VISUALIZERS
+from typing import Dict, List, Union
+from .options import PIPELINE_OPTIONS, CKIP_VISUALIZERS, CWN_VISUALIZERS
 
 
 def remove_input_data():
@@ -26,7 +25,7 @@ def format_option(option: Union[str, Dict[str, str]]) -> str:
     return option
 
 
-def visualize_side_bar():
+def visualize_side_bar(ckip_nlp_models: List[str]):
     with st.sidebar:
         st.image(
             "https://avatars.githubusercontent.com/u/21136511?s=200&v=4", width=100
@@ -44,7 +43,7 @@ def visualize_side_bar():
             model_options = form_controller(
                 control="select-box",
                 title="NLP 模型：",
-                options=MODEL_OPTIONS,
+                options=ckip_nlp_models,
                 key="model",
             )
 

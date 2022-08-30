@@ -18,4 +18,3 @@ EXPOSE 8501
 
 COPY ./.streamlit ./.streamlit
 COPY ./src ./src
-COPY ./startapp.sh ./startapp.sh

@@ -2,20 +2,14 @@ import pickle
 import asyncio
 import aiofiles
 from pathlib import Path
-from typing import Optional
 
-
-# --------------------------------------------------------------------
-# ckip drivers
 
 pkg_path = Path("__file__").resolve().parent / "src"
-ckip_dir = pkg_path / "models"
-ckip_path = ckip_dir / "ckip"
+ckip_path = pkg_path / "models" / "ckip"
 
 
 async def write_drivers(nlp_model: str) -> None:
     """The write drivers function writes the ckip drivers to pickle files asynchronously.
-
     Args:
         nlp_model (str): the nlp model name
     """
@@ -40,18 +34,3 @@ async def write_drivers(nlp_model: str) -> None:
 
 async def download_ckip_drivers(ckip_nlp_models):
     await asyncio.gather(*list(map(write_drivers, ckip_nlp_models)))
-
-
-# --------------------------------------------------------------------
-# cwn packages
-
-cwn_model_path = Path.home().resolve() / ".cwn_graph"
-
-
-def download_cwn_models(upgrade: Optional[bool] = False):
-    import CwnSenseTagger, DistilTag
-    from CwnGraph import CwnImage
-
-    DistilTag.download(upgrade=upgrade)
-    CwnSenseTagger.download(upgrade=upgrade)
-    CwnImage.latest()

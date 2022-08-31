@@ -9,7 +9,6 @@ ckip-transformers = "*"
 cwngraph = "*"
 distiltag = "*"
 cwnsensetagger = "*"
-redis = "*"
 aiofiles = "*"
 python-dotenv = "*"
 

@@ -17,7 +17,6 @@ class PosTagging:
 
     def pack_ws_pos_sentece(self, ws_pos_pair: tuple) -> List[tuple]:
         """The pack_ws_pos_sentece method packs both words and thier part-of-speech to a pair.
-
         Args:
             ws_pos_pair (tuple): the pair of a word and its corresponding part-of-speech
         Returns:

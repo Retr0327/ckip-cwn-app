@@ -1,41 +1,18 @@
 import streamlit as st
-from pathlib import Path
-from configs import download_cwn_models, cwn_model_path
-
-
-def download_cwn_drivers(upgrade):
-    cwn_drivers = [
-        cwn_model_path / "cwn-graph-v.2022.08.01.pyobj",
-        cwn_model_path / "manifest.json",
-        cwn_model_path / "cwn-wsd-model",
-        cwn_model_path / "tagmodel",
-    ]
-
-    while not all(list(map(lambda path: Path(path).exists(), cwn_drivers))):
-        with st.spinner("Downloading CWN models ..."):
-            download_cwn_models(upgrade)
-
-        if all(list(map(lambda path: Path(path).exists(), cwn_drivers))):
-            break
+from views.components.spinner import dowload_ckip_package, download_cwn_drivers
 
 
 def run_app(ckip_nlp_models, cwn_upgrade) -> None:
     # need to download first because CWN packages will first check whether
     # there is .cwn_graph folder in the root directory.
     download_cwn_drivers(cwn_upgrade)
-
-    from views import (
-        display_cwn,
-        display_ckip,
-        create_data_form,
-        visualize_side_bar,
-        dowload_ckip_package,
-    )
-
     dowload_ckip_package(ckip_nlp_models)
 
+    from views.components.sidebar import visualize_side_bar
+    from views.containers import display_cwn, display_ckip, display_data_form
+
     st.title("LOPE")
-    input_data = create_data_form()
+    input_data = display_data_form()
     model, pipeline, active_visualizers = visualize_side_bar(ckip_nlp_models)
     display_factories = {"CKIP": display_ckip, "CWN": display_cwn}
 

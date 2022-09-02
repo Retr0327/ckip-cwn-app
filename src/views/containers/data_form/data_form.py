@@ -1,9 +1,9 @@
 import streamlit as st
 from .utils import clean_data
-from ...components import form_controller
+from ...components.form import form_controller
 
 
-def create_data_form():
+def display_data_form():
     with st.form("my_form"):
         input_data: str = form_controller("text-area", title="請輸入句子：")
         submitted = st.form_submit_button("確定")

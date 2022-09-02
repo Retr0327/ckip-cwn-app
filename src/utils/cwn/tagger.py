@@ -11,12 +11,12 @@ tagger = DistilTag()
 
 
 async def tag_values(value):
+    """The tag_values function makes `tagger.tag` function an asynchronous function."""
     return tagger.tag(value)
 
 
 async def disambiguate_word_sense(sentence_list: List[str]) -> List[Tuple[str]]:
     """The disambiguate_word_sense function disambiuates the word sense.
-
     Args:
         sentence_list (list): a list of sentences
     Returns:
@@ -31,6 +31,7 @@ async def disambiguate_word_sense(sentence_list: List[str]) -> List[Tuple[str]]:
 
 
 async def sense_value(value):
+    """The sense_value function makes `senseTag` function an asynchronous function."""
     return senseTag(value)
 
 

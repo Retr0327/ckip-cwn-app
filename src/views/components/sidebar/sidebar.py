@@ -39,6 +39,7 @@ def visualize_side_bar(ckip_nlp_models: List[str]):
         )
 
         model_options = None
+
         if pipeline_options == "CKIP":
             model_options = form_controller(
                 control="select-box",
@@ -47,14 +48,12 @@ def visualize_side_bar(ckip_nlp_models: List[str]):
                 key="model",
             )
 
-        visualizers = (
-            CKIP_VISUALIZERS if pipeline_options == "CKIP" else CWN_VISUALIZERS
-        )
+        visualizers = {"CKIP": CKIP_VISUALIZERS, "CWN": CWN_VISUALIZERS}
 
         active_visualizers = form_controller(
             control="multi-select",
             title="功能：",
-            options=visualizers,
+            options=visualizers[pipeline_options],
             format_func=format_option,
         )
 

@@ -1,6 +1,6 @@
 from typing import List
 from ...services import request
-from .block import DistilTagBlock, CWNSenseTagBlock
+from .blocks import DistilTagBlock, CWNSenseTagBlock
 
 
 def create_block(visualizer, sentence_list):

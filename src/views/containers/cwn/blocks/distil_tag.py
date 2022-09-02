@@ -18,7 +18,6 @@ class DistilTagBlock(Block):
     def render_horizontal_line(self, distil_tags: List[str]) -> str:
         """The render_horizontal_line method inserts the `divider_tag` in between each item
         in `distil_tags`.
-
         Args:
             distil_tags (List[str]): a list of span tags that are the result of word sense disambiguation.
         Returns:

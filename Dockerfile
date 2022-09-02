@@ -1,4 +1,3 @@
-
 FROM python:3.7-slim
 
 WORKDIR /app
@@ -14,7 +13,8 @@ RUN pip install pipenv && \
     pip uninstall pipenv -y \
     && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8501
-
 COPY ./.streamlit ./.streamlit
+
 COPY ./src ./src
+
+EXPOSE 8501

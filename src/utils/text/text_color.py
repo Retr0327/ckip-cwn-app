@@ -1,6 +1,5 @@
 def create_pos_color(pos: str) -> str:
     """The create_color function creats a text color base on the `pos` type.
-
     Args:
         pos (str): part of speech
     Returns:
@@ -28,7 +27,6 @@ def create_pos_color(pos: str) -> str:
 
 def create_entity_color(entity: str):
     """The create_color function creats a text color base on the `entity` type.
-
     Args:
         entity (str): an entity type from the result of NER
     Returns:

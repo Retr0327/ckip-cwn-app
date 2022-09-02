@@ -17,7 +17,6 @@ class WordSegmentation:
 
     def remove_empty_string(self, sentence_list: List[str]) -> List[str]:
         """The remove_empty_string method removes empty string in `sentence_list`.
-
         Args:
             sentence_list (list)
         Returns:
@@ -27,7 +26,6 @@ class WordSegmentation:
 
     def segment(self) -> List[Union[List[None], List[List[str]]]]:
         """The segment method divides written text in `sentence_lists` into meaningful units.
-
         Returns:
             a list of splitting text, an empty list otherwise.
         """

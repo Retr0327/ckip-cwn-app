@@ -12,7 +12,6 @@ def connect_ckip_drivers(nlp_model: str) -> tuple:
     """
 
     driver_path = ckip_path / f"{nlp_model}_drivers.pickle"
-    print('driver_path', driver_path)
 
     with open(driver_path, "rb") as file:
         return pickle.load(file)
